@@ -13,6 +13,9 @@ import Rightbar from "./components/rightbar/Rightbar";
 import Home from "./pages/home/Home";
 import Profile from "./pages/profile/Profile";
 import { Navigate } from "react-router-dom";
+import "./style.scss"
+import { useContext } from "react";
+import { DarkModeContext } from "./context/darkModeContext";
 // import Leftbar from "./components/leftbar/Leftbar";
 // import Rightbar from "./components/rightbar/Rightbar";
 
@@ -20,9 +23,13 @@ function App() {
 
   const currentUser = true;
 
+  const {darkMode} = useContext(DarkModeContext)
+
+  console.log(darkMode)
+
   const Layout = ()=>{
     return(
-      <div>
+      <div className={`theme-${darkMode ? "dark" : "light"}`}>
             <Navbar/>
             <div style={{display:"flex"}}>
               <Leftbar />
@@ -36,8 +43,8 @@ function App() {
 
             </div>
       </div>
-    )
-  }
+    );
+  };
 
   const ProtectedRoute = ({children}) => {
     if(!currentUser){
